@@ -6,13 +6,13 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { gonderenId, aliciId, mesaj } = req.body;
 
-    // التحقق من صحة البيانات
+   
     if (!gonderenId || !aliciId || !mesaj) {
       return res.status(400).json({ mesaj: 'Tüm alanlar zorunludur.' });
     }
 
     try {
-      // إرسال الرسالة إلى قاعدة البيانات
+     
       const newMessage = await prisma.mesaj.create({
         data: {
           gonderenId,
@@ -29,19 +29,19 @@ export default async function handler(req, res) {
   } else if (req.method === 'GET') {
     const { id } = req.query;
 
-    // التحقق من صحة الـ id (يجب أن يكون رقمًا صحيحًا)
+  
     if (!id || isNaN(id)) {
       return res.status(400).json({ mesaj: 'Geçersiz kullanıcı ID.' });
     }
 
     try {
-      // جلب الرسائل التي استلمها هذا المستخدم
+  
       const messages = await prisma.mesaj.findMany({
         where: {
-          aliciId: parseInt(id), // جلب جميع الرسائل التي تم استلامها بواسطة المستخدم
+          aliciId: parseInt(id), 
         },
         include: {
-          gonderen: true, // تضمين بيانات المرسل
+          gonderen: true, 
         },
       });
 

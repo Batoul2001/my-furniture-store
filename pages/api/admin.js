@@ -3,17 +3,17 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-  // جلب المنتجات عند استخدام GET
+ 
   if (req.method === 'GET') {
     try {
-      const urunler = await prisma.urun.findMany(); // جلب جميع المنتجات
+      const urunler = await prisma.urun.findMany(); 
       res.status(200).json({ urunler });
     } catch (error) {
       res.status(500).json({ mesaj: 'Ürünler alınırken bir hata oluştu.' });
     }
   }
   
-  // إضافة منتج جديد عند استخدام POST
+
   else if (req.method === 'POST') {
     const { ad, fiyat, kategori } = req.body;
 
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // تعديل منتج عند استخدام PUT
+
   else if (req.method === 'PUT') {
     const { id, ad, fiyat, kategori } = req.body;
 
@@ -50,7 +50,6 @@ export default async function handler(req, res) {
     }
   }
 
-  // حذف منتج عند استخدام DELETE
   else if (req.method === 'DELETE') {
     const { id } = req.query;
 

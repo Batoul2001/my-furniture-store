@@ -5,7 +5,7 @@ export default function Sepet() {
   const [sepet, setSepet] = useState([]);
 
   useEffect(() => {
-    // جلب المنتجات من localStorage عند تحميل الصفحة
+
     const storedSepet = JSON.parse(localStorage.getItem('sepet')) || [];
     setSepet(storedSepet);
   }, []);
@@ -13,7 +13,7 @@ export default function Sepet() {
   const handleRemoveFromCart = (urunId) => {
     const updatedSepet = sepet.filter((urun) => urun.id !== urunId);
     setSepet(updatedSepet);
-    localStorage.setItem('sepet', JSON.stringify(updatedSepet));  // تحديث السلة في localStorage
+    localStorage.setItem('sepet', JSON.stringify(updatedSepet));  
   };
 
   return (

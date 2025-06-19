@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const { eposta, sifre } = req.body;
 
     try {
-      // تحقق من بيانات المستخدم
+     
       const user = await prisma.kullanici.findUnique({
         where: { eposta },
       });

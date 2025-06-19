@@ -6,7 +6,6 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { ad, eposta, sifre } = req.body;
 
-    // تحقق من عدم وجود مستخدم بنفس البريد الإلكتروني
     const varOlan = await prisma.kullanici.findUnique({
       where: { eposta },
     });
@@ -15,7 +14,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ mesaj: 'Bu e-posta zaten kayıtlı.' });
     }
 
-    // إنشاء المستخدم الجديد
+    
     const yeniKullanici = await prisma.kullanici.create({
       data: { ad, eposta, sifre },
     });
