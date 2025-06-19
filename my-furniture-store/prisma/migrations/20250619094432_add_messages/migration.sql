@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "Mesaj" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "gonderenId" INTEGER NOT NULL,
+    "aliciId" INTEGER NOT NULL,
+    "mesaj" TEXT NOT NULL,
+    "gonderimTarihi" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Mesaj_gonderenId_fkey" FOREIGN KEY ("gonderenId") REFERENCES "Kullanici" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Mesaj_aliciId_fkey" FOREIGN KEY ("aliciId") REFERENCES "Kullanici" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

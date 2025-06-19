@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Kullanici {
+  id               Int       @id @default(autoincrement())
+  ad               String
+  eposta           String    @unique
+  sifre            String
+  rol              String    @default("kullanici")
+  siparisler       Siparis[]
+  gonderenMesajlar Mesaj[]   @relation("Gonderen")
+  aliciMesajlar    Mesaj[]   @relation("Alici")
+}
+
+model Urun {
+  id         Int       @id @default(autoincrement())
+  ad         String
+  fiyat      Float
+  kategori   String
+  siparisler Siparis[]
+}
+
+model Siparis {
+  id         Int       @id @default(autoincrement())
+  kullaniciId Int
+  kullanici  Kullanici @relation(fields: [kullaniciId], references: [id])
+  urunId     Int
+  urun       Urun      @relation(fields: [urunId], references: [id])
+  durum      String    @default("bekliyor")
+}
+
+model Mesaj {
+  id             Int       @id @default(autoincrement())
+  gonderenId     Int
+  aliciId        Int
+  mesaj          String
+  gonderimTarihi DateTime  @default(now())
+  gonderen       Kullanici @relation("Gonderen", fields: [gonderenId], references: [id])
+  alici          Kullanici @relation("Alici", fields: [aliciId], references: [id])
+}
